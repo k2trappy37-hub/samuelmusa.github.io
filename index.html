@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<!--
+  ====================================================================
+  HOW TO USE THIS FILE — READ ME FIRST
+  ====================================================================
+  1. Everywhere you see [EDIT: ...] — replace it with your real info.
+  2. This is ONE file. No build tools, no npm, nothing to install.
+  3. To publish on GitHub Pages:
+       a. Create a new repo, e.g. "portfolio"
+       b. Upload this file and rename it to exactly: index.html
+       c. Repo → Settings → Pages → Source: "Deploy from branch",
+          Branch: main, folder: / (root) → Save
+       d. Your site goes live at: https://yourusername.github.io/portfolio/
+  4. Swap [EDIT: link] placeholders for real links (LinkedIn, resume PDF,
+     case study decks, etc.) once you have them.
+  ====================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samuel Musa — Tech × Business × Customer Solutions</title>
+<meta name="description" content="Portfolio of Samuel Musa — case studies in tech sales, solutions consulting, and IT consulting.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:      #12151A;
+    --ink-2:    #1B1F27;
+    --card:     #1E232C;
+    --line:     #2C323D;
+    --paper:    #ECE9E1;
+    --paper-dim:#9BA3B0;
+    --lime:     #C9F42C;
+    --lime-dim: #7C8A2E;
+    --amber:    #F2A65A;
+
+    --display: 'Space Grotesk', sans-serif;
+    --body:    'Inter', sans-serif;
+    --mono:    'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  ::selection{ background:var(--lime); color:var(--ink); }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- background grid texture ---------- */
+  .grid-bg{
+    position:fixed; inset:0; z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.18;
+    mask-image:radial-gradient(circle at 50% 0%, black, transparent 75%);
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,21,26,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--paper);
+    text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--lime);
+    box-shadow:0 0 8px var(--lime);
+  }
+  .navlinks{ display:flex; gap:28px; list-style:none; }
+  .navlinks a{
+    font-family:var(--mono);
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--paper-dim);
+    text-decoration:none;
+    transition:color .2s;
+  }
+  .navlinks a:hover{ color:var(--lime); }
+  @media(max-width:640px){ .navlinks{ gap:16px; } }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--lime);
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px; background:var(--lime);
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(34px, 6vw, 58px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    max-width:16ch;
+  }
+  h1 .accent{ color:var(--lime); }
+
+  .role-line{
+    margin-top:22px;
+    font-family:var(--mono);
+    font-size:15px;
+    color:var(--paper-dim);
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+  }
+  .role-line .cursor{ color:var(--lime); }
+  #roleTarget{ color:var(--paper); border-bottom:1px solid var(--lime-dim); padding-bottom:1px; }
+
+  .hero-sub{
+    margin-top:26px;
+    max-width:56ch;
+    font-size:17px;
+    color:#C7CAD1;
+  }
+
+  .cta-row{
+    margin-top:36px;
+    display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.02em;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:2px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--lime); color:var(--ink); font-weight:500; }
+  .btn-primary:hover{ background:#d9ff4f; }
+  .btn-ghost{ border:1px solid var(--line); color:var(--paper); }
+  .btn-ghost:hover{ border-color:var(--lime-dim); }
+
+  /* ---------- section label ---------- */
+  .section{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:44px; gap:20px; flex-wrap:wrap;
+  }
+  .section-tag{
+    font-family:var(--mono); font-size:12.5px; color:var(--paper-dim);
+    text-transform:uppercase; letter-spacing:0.1em;
+  }
+  .section-title{
+    font-family:var(--display); font-size:clamp(24px,3.4vw,34px);
+    font-weight:600; letter-spacing:-0.01em;
+  }
+
+  /* ---------- capabilities ---------- */
+  .cap-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+  }
+  .cap{
+    background:var(--ink); padding:26px 22px;
+  }
+  .cap-num{ font-family:var(--mono); font-size:11.5px; color:var(--lime); }
+  .cap h3{
+    font-family:var(--display); font-size:18px; font-weight:600;
+    margin-top:10px; margin-bottom:8px;
+  }
+  .cap p{ font-size:14px; color:var(--paper-dim); }
+
+  /* ---------- case studies ---------- */
+  .case{
+    background:var(--card);
+    border:1px solid var(--line);
+    margin-bottom:22px;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .case-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:16px; flex-wrap:wrap; margin-bottom:18px;
+  }
+  .case-id{
+    font-family:var(--mono); font-size:12px; color:var(--paper-dim);
+    letter-spacing:0.05em;
+  }
+  .status{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase;
+    letter-spacing:0.06em; padding:4px 10px; border-radius:2px;
+    border:1px solid var(--lime-dim); color:var(--lime);
+  }
+  .status.live{ border-color:var(--amber); color:var(--amber); }
+
+  .case h3{
+    font-family:var(--display); font-size:23px; font-weight:600;
+    margin-bottom:10px; max-width:34ch;
+  }
+  .case p.desc{ color:#C7CAD1; font-size:15px; max-width:62ch; margin-bottom:22px; }
+
+  /* pipeline bar — the signature element */
+  .pipeline{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background:var(--line); border:1px solid var(--line);
+    margin-bottom:20px;
+  }
+  .stage{ background:var(--ink-2); padding:14px 16px; }
+  .stage .k{
+    font-family:var(--mono); font-size:10.5px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--lime-dim); margin-bottom:6px; display:block;
+  }
+  .stage .v{ font-size:13px; color:var(--paper); }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .tag{
+    font-family:var(--mono); font-size:11px; color:var(--paper-dim);
+    border:1px solid var(--line); padding:5px 10px; border-radius:2px;
+  }
+
+  .case-links{ display:flex; gap:18px; flex-wrap:wrap; }
+  .case-links a{
+    font-family:var(--mono); font-size:12.5px; text-decoration:none;
+    color:var(--lime); border-bottom:1px solid var(--lime-dim);
+    padding-bottom:2px;
+  }
+  .case-links a:hover{ border-color:var(--lime); }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px;
+  }
+  @media(max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ color:#C7CAD1; font-size:15.5px; margin-bottom:16px; max-width:58ch; }
+  .stat-list{ display:flex; flex-direction:column; gap:0; }
+  .stat{
+    padding:18px 0; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .stat:last-child{ border-bottom:1px solid var(--line); }
+  .stat .label{ font-family:var(--mono); font-size:12.5px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.05em; }
+  .stat .value{ font-family:var(--display); font-size:17px; font-weight:600; color:var(--lime); text-align:right; }
+
+  /* ---------- contact ---------- */
+  .contact{
+    padding:90px 0 100px; text-align:left;
+  }
+  .contact h2{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(28px,5vw,44px); max-width:14ch; letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+  .contact p{ color:#C7CAD1; max-width:52ch; margin-bottom:34px; font-size:16px; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:26px 0;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-family:var(--mono); font-size:12px; color:var(--paper-dim);
+  }
+  footer a{ text-decoration:none; color:var(--paper-dim); }
+  footer a:hover{ color:var(--lime); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top"><span class="dot"></span>[EDIT: SAMUEL MUSA] / PORTFOLIO</a>
+      <ul class="navlinks">
+        <li><a href="#work">Case Files</a></li>
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Open to Summer 2027 Internships</div>
+      <h1>I turn business problems into <span class="accent">tech-shaped solutions.</span></h1>
+      <div class="role-line">
+        <span>Actively pursuing roles in</span>
+        <span id="roleTarget">Tech Sales</span>
+        <span class="cursor">/</span>
+      </div>
+      <p class="hero-sub">
+        [EDIT: one-line bio] — Business & Technology Management student who
+        pairs discovery-driven thinking with hands-on tech fluency. Below are
+        case files: real and modeled engagements where I diagnosed a problem,
+        designed a solution, and made the business case for it.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#work">View Case Files ↓</a>
+        <a class="btn btn-ghost" href="mailto:[EDIT: your@email.com]">Book an Intro Call</a>
+        <a class="btn btn-ghost" href="[EDIT: link to resume PDF]">Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CAPABILITIES ================= -->
+  <section class="section" id="capabilities">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">Capabilities</div>
+          <div class="section-title">What I bring to a deal or engagement</div>
+        </div>
+      </div>
+      <div class="cap-grid">
+        <div class="cap">
+          <div class="cap-num">→ 01</div>
+          <h3>Discovery & Needs Analysis</h3>
+          <p>Asking the right questions before proposing anything — root cause over surface symptom.</p>
+        </div>
+        <div class="cap">
+          <div class="cap-num">→ 02</div>
+          <h3>Solution Design</h3>
+          <p>Mapping a business pain point to a realistic tech/AI-enabled fix, scoped to budget and timeline.</p>
+        </div>
+        <div class="cap">
+          <div class="cap-num">→ 03</div>
+          <h3>CRM & No-Code Tooling</h3>
+          <p>[EDIT: e.g. Salesforce, HubSpot, Airtable, Zapier/Make] — comfortable building and operating the tools reps and consultants live in.</p>
+        </div>
+        <div class="cap">
+          <div class="cap-num">→ 04</div>
+          <h3>Client-Facing Communication</h3>
+          <p>Translating technical detail into a pitch a non-technical stakeholder will actually act on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CASE FILES ================= -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">Selected Work</div>
+          <div class="section-title">Case Files</div>
+        </div>
+      </div>
+
+      <!-- CASE 1: real, existing brand partnership -->
+      <div class="case reveal">
+        <div class="case-top">
+          <span class="case-id">CASE FILE / KH—01</span>
+          <span class="status live">Live Engagement</span>
+        </div>
+        <h3>Knottyhead × @Trulysamm_ — Creator Partnership as a Distribution Channel</h3>
+        <p class="desc">
+          [EDIT 2–3 sentences]: How you approached the brand, what the partnership involved,
+          and what it produced. Frame it like a mini account: the "client" (Knottyhead) had a
+          reach/credibility problem, and content was the solution.
+        </p>
+        <div class="pipeline">
+          <div class="stage"><span class="k">Discovery</span><span class="v">[EDIT: brand's goal]</span></div>
+          <div class="stage"><span class="k">Approach</span><span class="v">[EDIT: content strategy]</span></div>
+          <div class="stage"><span class="k">Delivery</span><span class="v">[EDIT: # of assets/videos]</span></div>
+          <div class="stage"><span class="k">Impact</span><span class="v">[EDIT: views / engagement / sales lift]</span></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">UGC</span>
+          <span class="tag">Brand Partnership</span>
+          <span class="tag">Content Strategy</span>
+        </div>
+        <div class="case-links">
+          <a href="[EDIT: link to TikTok content]">View Content ↗</a>
+          <a href="[EDIT: link to UGC media kit PDF]">Media Kit ↗</a>
+        </div>
+      </div>
+
+      <!-- CASE 2: modeled consulting engagement -->
+      <div class="case reveal">
+        <div class="case-top">
+          <span class="case-id">CASE FILE / RT—02</span>
+          <span class="status">Modeled Engagement</span>
+        </div>
+        <h3>[EDIT: Company/Industry] — Reducing Checkout Drop-Off with a Lightweight Fix</h3>
+        <p class="desc">
+          [EDIT]: A real or hypothetical company with a public, diagnosable problem.
+          Write it like a consulting brief — what was broken, why, and what you proposed.
+          Keep it concrete: name the tech, name the number.
+        </p>
+        <div class="pipeline">
+          <div class="stage"><span class="k">Problem</span><span class="v">[EDIT: e.g. 22% cart abandonment]</span></div>
+          <div class="stage"><span class="k">Root Cause</span><span class="v">[EDIT: diagnosis]</span></div>
+          <div class="stage"><span class="k">Solution</span><span class="v">[EDIT: proposed fix]</span></div>
+          <div class="stage"><span class="k">Projected ROI</span><span class="v">[EDIT: $ or % impact]</span></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Solutions Consulting</span>
+          <span class="tag">Retail</span>
+          <span class="tag">Case Study</span>
+        </div>
+        <div class="case-links">
+          <a href="[EDIT: link to write-up]">Read Case Study ↗</a>
+          <a href="[EDIT: link to slide deck]">View Deck ↗</a>
+        </div>
+      </div>
+
+      <!-- CASE 3: AI workflow build -->
+      <div class="case reveal">
+        <div class="case-top">
+          <span class="case-id">CASE FILE / AI—03</span>
+          <span class="status">Modeled Engagement</span>
+        </div>
+        <h3>[EDIT: Process Name] — Automating a Manual Workflow with AI</h3>
+        <p class="desc">
+          [EDIT]: Pick a real manual process (lead sorting, feedback summarizing, follow-up
+          emails) and describe the before/after. Show you can architect a solution, not just
+          talk about one.
+        </p>
+        <div class="pipeline">
+          <div class="stage"><span class="k">Before</span><span class="v">[EDIT: manual process, time cost]</span></div>
+          <div class="stage"><span class="k">Tooling</span><span class="v">[EDIT: e.g. Claude + Zapier]</span></div>
+          <div class="stage"><span class="k">After</span><span class="v">[EDIT: new process]</span></div>
+          <div class="stage"><span class="k">Time Saved</span><span class="v">[EDIT: hrs/week]</span></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">AI Automation</span>
+          <span class="tag">Process Design</span>
+          <span class="tag">No-Code</span>
+        </div>
+        <div class="case-links">
+          <a href="[EDIT: link to demo/loom]">Watch Demo ↗</a>
+          <a href="[EDIT: link to write-up]">Read Write-up ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="section-tag" style="margin-bottom:14px;">About</div>
+        <p>
+          [EDIT]: I'm a Business & Technology Management student building toward
+          a career at the intersection of tech, business, and customer solutions —
+          tech sales, solutions consulting, IT consulting. I like problems that need
+          both a spreadsheet and a conversation to solve.
+        </p>
+        <p>
+          [EDIT]: Outside coursework, I run [EDIT: brief context on your content/creator
+          work] — which taught me a lot about audience, positioning, and what actually
+          gets someone to act on a pitch.
+        </p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><span class="label">Program</span><span class="value">[EDIT: BTM, Year]</span></div>
+        <div class="stat"><span class="label">Target Start</span><span class="value">[EDIT: Summer 2027]</span></div>
+        <div class="stat"><span class="label">Focus Areas</span><span class="value">Tech Sales / Solutions / IT Consulting</span></div>
+        <div class="stat"><span class="label">Tools</span><span class="value">[EDIT: Salesforce, HubSpot, Notion, etc.]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Let's talk about the role.</h2>
+      <p>
+        Open to internship conversations, coffee chats, and anything at the
+        intersection of tech and business. Fastest way to reach me is email.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:[EDIT: your@email.com]">Email Me</a>
+        <a class="btn btn-ghost" href="[EDIT: LinkedIn URL]">LinkedIn ↗</a>
+        <a class="btn btn-ghost" href="[EDIT: TikTok URL]">@Trulysamm_ ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© <span id="year"></span> [EDIT: Samuel Musa]. Built with intent, not a template.</span>
+    <span><a href="#top">Back to top ↑</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Rotating role text in hero
+  var roles = ["Tech Sales", "Solutions Consulting", "IT Consulting"];
+  var i = 0;
+  var el = document.getElementById('roleTarget');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!prefersReduced){
+    setInterval(function(){
+      i = (i + 1) % roles.length;
+      el.style.opacity = 0;
+      setTimeout(function(){
+        el.textContent = roles[i];
+        el.style.opacity = 1;
+      }, 250);
+    }, 2200);
+    el.style.transition = 'opacity .25s ease';
+  }
+
+  // Reveal-on-scroll for case cards
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !prefersReduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(r){ io.observe(r); });
+  } else {
+    reveals.forEach(function(r){ r.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
